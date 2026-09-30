@@ -27,13 +27,15 @@ export const User = sequelize.define(
         imageURL: {
             type: DataTypes.STRING,
             allowNull: true,
+            defaultValue: null
         },
         biography: {
             type: DataTypes.CHAR(255),
             allowNull: true,
+            defaultValue: null
         },
         registeredAt: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         eliminated: {
@@ -42,13 +44,14 @@ export const User = sequelize.define(
             defaultValue: false,
         },
         eliminatedAt: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: true,
             defaultValue: null,
         },
         userType: {
             type: DataTypes.ENUM("ADMIN", "USER"),
             allowNull: false,
+            defaultValue: "USER",
         }
     },
     {
