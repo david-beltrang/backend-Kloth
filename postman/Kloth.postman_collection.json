@@ -1,0 +1,51 @@
+{
+  "info": {
+    "name": "Kloth API",
+    "description": "Consultas de lectura del backend de Kloth (usuarios y articulos).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "Usuario por id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/users/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["users", "1"]
+        },
+        "description": "Devuelve un usuario por su id. 404 si no existe."
+      }
+    },
+    {
+      "name": "Todos los articulos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/articles",
+          "host": ["{{baseUrl}}"],
+          "path": ["articles"]
+        },
+        "description": "Devuelve todos los articulos (prendas, outfits, marcas y eventos), los mas recientes primero, con su creador."
+      }
+    },
+    {
+      "name": "Detalle de articulo por id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/articles/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["articles", "1"]
+        },
+        "description": "Devuelve el detalle de un articulo con su creador. 404 si no existe."
+      }
+    }
+  ]
+}
