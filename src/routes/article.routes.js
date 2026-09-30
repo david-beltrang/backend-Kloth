@@ -5,7 +5,8 @@ import {
     getArticleById,
     createArticle,
     updateArticle,
-    deleteArticle
+    deleteArticle,
+    getReviewsByArticle
 }  from '../controller/article.controller.js';
 
 const router = Router();
@@ -24,5 +25,8 @@ router.put('/articles/:id', updateArticle);
 
 //delete localhost:3000/articles/:id
 router.delete('/articles/:id', deleteArticle);
+
+//get localhost:3000/articles/:id/reviews
+router.get('/articles/:id/reviews', getReviewsByArticle);
 
 export default router;

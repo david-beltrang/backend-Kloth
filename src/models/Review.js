@@ -32,6 +32,7 @@ export const Review = sequelize.define(
         text: {
             type: DataTypes.CHAR(255),
             allowNull: true,
+            defaultValue: null
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -40,10 +41,12 @@ export const Review = sequelize.define(
         updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
+            defaultValue: null
         },
         eliminated: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+            defaultValue: false
         }
     },
     {

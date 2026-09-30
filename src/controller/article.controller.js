@@ -1,4 +1,5 @@
 import {Article} from "../models/Article.js";
+import {Review} from "../models/Review.js";
 
 export const getAllArticles = async (req, res) => {
   try {
@@ -58,4 +59,32 @@ export const deleteArticle = async (req, res) => {
     }catch (error) {
         return res.status(500).json({ message: error.message });
     }
-}
+};
+
+export const getReviewsByArticle = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const article = await Article.findByPk(id);
+
+        if (!article) {
+            return res.status(404).json({
+                message: "Article not found"
+            });
+        }
+
+        const reviews = await Review.findAll({
+            where: {
+                articleId: id
+            },
+            order : [['createdAt', 'DESC']]
+        });
+
+
+        return res.json(reviews);
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
