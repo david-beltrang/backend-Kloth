@@ -1,4 +1,5 @@
 import { User } from '../models/User.js';
+import {Review} from "../models/Review.js";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -49,4 +50,32 @@ export const deleteUser = async (req, res) => {
     const user = await User.findByPk(id);
     await user.destroy();
     return res.sendStatus(204); //detele ok
-}
+};
+
+export const getReviewsByUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findByPk(id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        const reviews = await Review.findAll({
+            where: {
+                userId: id
+            },
+            order : [['createdAt', 'DESC']]
+        });
+
+
+        return res.json(reviews);
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
