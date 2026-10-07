@@ -46,10 +46,25 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-    const id = req.params.id;
-    const user = await User.findByPk(id);
-    await user.destroy();
-    return res.sendStatus(204); //detele ok
+    try {
+        const id = req.params.id;
+
+        const user = await User.findByPk(id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        await user.destroy();
+
+        return res.sendStatus(204);
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
 };
 
 export const getReviewsByUser = async (req, res) => {

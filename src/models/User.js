@@ -36,7 +36,7 @@ export const User = sequelize.define(
         },
         registeredAt: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
+            allowNull: true,
         },
         eliminated: {
             type: DataTypes.BOOLEAN,

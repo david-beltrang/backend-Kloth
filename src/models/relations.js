@@ -21,6 +21,7 @@ export function setupRelations() {
     Article.belongsTo(User, {
         foreignKey: "idUser",
         as: "user",
+        onDelete: "CASCADE"
     });
 
     //3. Usuario tiene muchos Seguidos (N:M)
@@ -28,7 +29,7 @@ export function setupRelations() {
         through: Follower,
         as: "following",
         foreignKey: "idUserFollower",
-        otherKey: "idUserFollowing",
+        otherKey: "idUserFollowing"
     });
 
     //4. Usuario tiene muchos Seguidores (N:M)
@@ -43,12 +44,15 @@ export function setupRelations() {
     User.hasMany(Review, { 
         foreignKey: 'userId', 
         as: 'userReviews', 
-        onDelete: 'SET NULL' });
+        onDelete: "CASCADE"
+    });
 
     //6. Reseña pertenece a un Usuario (N:1)
     Review.belongsTo(User, { 
         foreignKey: 'userId', 
-        as: 'author' });
+        as: 'author',
+        onDelete: "CASCADE" 
+    });
 
     //7. Artículo tiene muchas reseñas (1:N)
     Article.hasMany(Review, { 
