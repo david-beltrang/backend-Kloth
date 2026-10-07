@@ -36,16 +36,16 @@ export const Review = sequelize.define(
         },
         createdAt: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         updatedAt: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
             defaultValue: null
         },
         eliminated: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            allowNull: true,
             defaultValue: false
         }
     },
