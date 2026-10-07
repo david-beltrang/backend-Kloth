@@ -1,5 +1,6 @@
 import { User } from '../models/User.js';
 import {Review} from "../models/Review.js";
+import {Article} from "../models/Article.js";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -87,6 +88,34 @@ export const getReviewsByUser = async (req, res) => {
 
 
         return res.json(reviews);
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const getArticlesByUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findByPk(id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        const articles = await Article.findAll({
+            where: {
+                idUser: id,
+                eliminated: false
+            },
+            order : [['createdAt', 'DESC']]
+        });
+
+        return res.json(articles);
 
     } catch (error) {
         return res.status(500).json({

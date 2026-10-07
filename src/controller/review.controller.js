@@ -48,14 +48,14 @@ export const updateReview = async (req, res) => {
 
 export const deleteReview = async (req, res) => {
     try {
-    const id = req.params.id;
-    const review = await Review.findByPk(id);
-    if (!review) {
-        return res.status(404).json({ message: 'Review not found' });
-    }
-    await review.destroy();
-    return res.sendStatus(204); //delete ok
-    }catch (error) {
+        const id = req.params.id;
+        const review = await Review.findByPk(id);
+        if (!review) {
+            return res.status(404).json({ message: 'Review not found' });
+        }
+        await review.destroy();
+        return res.json({ deleted: true });
+    } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 };

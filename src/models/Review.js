@@ -34,6 +34,11 @@ export const Review = sequelize.define(
             allowNull: true,
             defaultValue: null
         },
+        likesCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: true,

@@ -160,12 +160,20 @@ const initialReviews = [
     },
 ];
 
+// Likes iniciales de cada reseña, en el mismo orden que initialReviews.
+const initialLikes = [12, 4, 9, 3, 7, 5, 8, 6, 2, 4, 11, 3, 5, 2, 7, 6];
+
 export async function loadInitialReviews() {
     try {
         const count = await Review.count();
 
         if (count === 0) {
-            await Review.bulkCreate(initialReviews);
+            await Review.bulkCreate(
+                initialReviews.map((review, index) => ({
+                    ...review,
+                    likesCount: initialLikes[index] ?? 0,
+                }))
+            );
 
             console.log(
                 `Reseñas iniciales cargadas: ${initialReviews.length}`

@@ -40,6 +40,10 @@ export const Article = sequelize.define(
         imageArticle: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        tags: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
         }
     },
     {
