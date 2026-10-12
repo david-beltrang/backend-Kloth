@@ -4,9 +4,6 @@ import { Outfit } from "../models/Article-Type/Outfit.js";
 import { Brand } from "../models/Article-Type/Brand.js";
 import { Event } from "../models/Article-Type/Event.js";
 
-// Datos especificos de cada tipo de articulo. articleTitle permite localizar el
-// articleId real sin asumir valores del auto-incremental.
-
 const initialClothing = [
     {
         articleTitle: "Nike Air Force 1 '07",
@@ -114,7 +111,6 @@ async function bulkCreateByArticleTitle(model, rows, label) {
     const articles = await Article.findAll({
         attributes: ["articleId", "title"],
     });
-    // title es CHAR(200): PostgreSQL devuelve el valor relleno con espacios.
     const articleIdByTitle = new Map(
         articles.map((article) => [article.title.trim(), article.articleId])
     );

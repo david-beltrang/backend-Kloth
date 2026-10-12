@@ -1,8 +1,6 @@
 import { Article } from '../models/Article.js';
 import { User } from '../models/User.js';
 
-// Datos de ejemplo. Precios y fechas son valores ilustrativos; las imagenes
-// son placeholders de picsum.photos. creatorUsername se traduce a creatorId al cargar.
 const initialArticles = [
     {
         typeArticle: "PRENDA",

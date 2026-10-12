@@ -1,8 +1,6 @@
 import { Review } from '../models/Review.js';
 import { Comment } from '../models/Comment.js';
 
-// Comentarios de ejemplo. reviewIndex apunta a la posición de la reseña dentro
-// de initialReviews (initReviews.js), para no depender de IDs fijos.
 const initialComments = [
     {
         reviewIndex: 0,
