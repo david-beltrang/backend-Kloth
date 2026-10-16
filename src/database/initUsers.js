@@ -1,6 +1,5 @@
 import { User } from '../models/User.js';
 
-// Datos ficticios. Las imagenes son placeholders de picsum.photos.
 const initialUsers = [
     {
         email: "valentina.restrepo@example.com",

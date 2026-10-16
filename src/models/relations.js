@@ -2,6 +2,7 @@ import { Article } from "./Article.js";
 import {User} from "./User.js";
 import { Follower } from "./Follower.js";
 import { Review } from "./Review.js";
+import { Comment } from "./Comment.js";
 import { Clothing } from "./Article-Type/Clothing.js";
 import {Event} from "./Article-Type/Event.js";
 import {Outfit} from "./Article-Type/Outfit.js";
@@ -127,5 +128,35 @@ export function setupRelations() {
         as: "article",
         onDelete: "CASCADE",
         hooks: true,
+    });
+
+    //16. Reseña tiene muchos comentarios (1:N)
+    Review.hasMany(Comment, {
+        foreignKey: "reviewId",
+        as: "reviewComments",
+        onDelete: "CASCADE",
+        hooks: true,
+    });
+
+    //17. Comentario pertenece a una Reseña (N:1)
+    Comment.belongsTo(Review, {
+        foreignKey: "reviewId",
+        as: "review",
+        onDelete: "CASCADE",
+    });
+
+    //18. Usuario tiene muchos comentarios (1:N)
+    User.hasMany(Comment, {
+        foreignKey: "userId",
+        as: "userComments",
+        onDelete: "CASCADE",
+        hooks: true,
+    });
+
+    //19. Comentario pertenece a un Usuario (N:1)
+    Comment.belongsTo(User, {
+        foreignKey: "userId",
+        as: "author",
+        onDelete: "CASCADE",
     });
 }

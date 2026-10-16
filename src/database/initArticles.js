@@ -1,8 +1,6 @@
 import { Article } from '../models/Article.js';
 import { User } from '../models/User.js';
 
-// Datos de ejemplo. Precios y fechas son valores ilustrativos; las imagenes
-// son placeholders de picsum.photos. creatorUsername se traduce a creatorId al cargar.
 const initialArticles = [
     {
         typeArticle: "PRENDA",
@@ -135,6 +133,71 @@ const initialArticles = [
         imageArticle:
             "https://picsum.photos/seed/kloth-pfw/600/400",
     },
+
+    {
+        typeArticle: "PRENDA",
+        title: "Gabardina beige oversize",
+        description:
+            "Gabardina larga de corte relajado en tono camel. Perfecta para capas en días lluviosos.",
+        createdAt: new Date("2026-10-01"),
+        idUser: 1, // vale_restrepo
+        eliminated: false,
+        imageArticle:
+            "https://picsum.photos/seed/kloth-trench/600/800",
+    },
+    {
+        typeArticle: "PRENDA",
+        title: "Blazer negro estructurado",
+        description:
+            "Blazer de sastrería en negro con hombros marcados. Eleva cualquier look básico.",
+        createdAt: new Date("2026-10-02"),
+        idUser: 1, // vale_restrepo
+        eliminated: false,
+        imageArticle:
+            "https://picsum.photos/seed/kloth-blazer/600/800",
+    },
+    {
+        typeArticle: "OUTFIT",
+        title: "Look de noche total black",
+        description:
+            "Blazer negro, pantalón de vestir y tacones. Sobrio, elegante y sin esfuerzo.",
+        createdAt: new Date("2026-10-03"),
+        idUser: 1, // vale_restrepo
+        eliminated: false,
+        imageArticle:
+            "https://picsum.photos/seed/kloth-look-night/600/800",
+    },
+    {
+        typeArticle: "OUTFIT",
+        title: "Casual de fin de semana",
+        description:
+            "Gabardina camel, suéter de cuello alto y jean recto. Simple pero con carácter.",
+        createdAt: new Date("2026-10-04"),
+        idUser: 1, // vale_restrepo
+        eliminated: false,
+        imageArticle:
+            "https://picsum.photos/seed/kloth-look-weekend/600/800",
+    },
+];
+
+// Tags de cada artículo, en el mismo orden que initialArticles.
+const initialTags = [
+    ["tenis", "streetwear", "casual"],
+    ["tenis", "streetwear", "retro"],
+    ["chaqueta", "denim", "vintage"],
+    ["bolso", "cuero", "accesorios"],
+    ["oficina", "minimalista", "formal"],
+    ["streetwear", "casual", "comodidad"],
+    ["vintage", "segunda mano", "cuero"],
+    ["marca", "cuero", "colombia"],
+    ["marca", "deportivo", "streetwear"],
+    ["marca", "deportivo", "retro"],
+    ["evento", "moda", "colombia"],
+    ["evento", "moda", "paris"],
+    ["gabardina", "oversize", "minimalista"],
+    ["blazer", "sastreria", "formal"],
+    ["noche", "elegante", "total black"],
+    ["casual", "fin de semana", "minimalista"],
 ];
 
 export async function loadInitialArticles() {
@@ -142,7 +205,12 @@ export async function loadInitialArticles() {
         const count = await Article.count();
 
         if (count === 0) {
-            await Article.bulkCreate(initialArticles);
+            await Article.bulkCreate(
+                initialArticles.map((article, index) => ({
+                    ...article,
+                    tags: initialTags[index] ?? [],
+                }))
+            );
 
             console.log(
                 `Articulos iniciales cargados: ${initialArticles.length}`
